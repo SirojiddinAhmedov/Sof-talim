@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | My Site</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Navbar -->
+ <header class="navbar">
+  <div class="logo">MySite</div>
+
+  <nav class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">Course</a>
+    <a href="#">Price</a>
+    <a href="#">About Us</a>
+  </nav>
+
+  <div class="burger" id="burger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</header>
+
+<!-- Yon menyu drawer -->
+<div class="side-menu" id="sideMenu">
+  <a href="#">Home</a>
+  <a href="#">Course</a>
+  <a href="#">Price</a>
+  <a href="#">About Us</a>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Kursga yoziling</h1>
+    <p>Ma'lumot qoldiring, menejerlar siz bilan bog‘lanadi</p>
+
+    <form id="leadForm" class="form">
+  <input
+    type="text"
+    id="name"
+    placeholder="Ismingiz"
+    maxlength="50"
+    required
+  />
+
+   <!-- Kurs select -->
+  <select id="course" required>
+    <option value="" disabled selected>Kursni tanlang</option>
+    <option value="rus">Rus tili</option>
+    <option value="ingliz">Ingliz tili</option>
+    <option value="arab">Arab tili</option>
+    <option value="matematika">Matematika</option>
+    <option value="turk">Turk tili</option>
+    <option value="pochemuchka">Pochemuchka</option>
+  </select>
+  
+  <input
+    type="tel"
+    id="phone"
+    placeholder="+998 ___ ___ ___"
+    value="+998"
+    maxlength="13"
+    required
+  />
+
+  <button type="submit">Yuborish</button>
+</form>
+
+<div id="status"></div>
+
+
+    <p id="status" class="status"></p>
+  </section>
+
+
+   <!-- Kurslar haqida  -->
+  <section class="courses">
+  <h2>Bizning kurslar</h2>
+
+  <div class="carousel-wrapper">
+    <button class="nav-btn left" id="prevBtn">‹</button>
+
+    <div class="carousel" id="carousel">
+
+      <div class="course-card">
+        <h3>Rus tili</h3>
+        <p>Grammatika va so‘zlashuv</p>
+      </div>
+
+      <div class="course-card">
+        <h3>Ingliz tili</h3>
+        <p>Beginner → Advanced</p>
+      </div>
+
+      <div class="course-card">
+        <h3>Turk tili</h3>
+        <p>Kundalik muloqot</p>
+      </div>
+
+      <div class="course-card">
+        <h3>Matematika</h3>
+        <p>Maktab va imtihonlar</p>
+      </div>
+
+      <div class="course-card">
+        <h3>Arab tili</h3>
+        <p>O‘qish va yozish</p>
+      </div>
+
+    </div>
+
+    <button class="nav-btn right" id="nextBtn">›</button>
+  </div>
+</section>
+
+
+
+<section class="faq">
+  <h2>Ko‘p beriladigan savollar</h2>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-question">Kurslar necha oy davom etadi?</div>
+      <div class="faq-answer">O‘rtacha 3–6 oy davom etadi, kurs turiga qarab farq qiladi.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Darslar haftasiga necha marta bo‘ladi?</div>
+      <div class="faq-answer">Haftasiga 3 marta, har bir dars 90 daqiqa.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Boshlang‘ichlar uchun guruhlar bormi?</div>
+      <div class="faq-answer">Ha, mutlaqo noldan boshlovchilar uchun alohida guruhlar mavjud.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">To‘lovni bo‘lib to‘lash mumkinmi?</div>
+      <div class="faq-answer">Ha, oyma-oy to‘lash imkoniyati bor.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Sertifikat beriladimi?</div>
+      <div class="faq-answer">Kurs yakunida ichki sertifikat taqdim etiladi.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">O‘qituvchilar tajribalimi?</div>
+      <div class="faq-answer">Barcha ustozlar kamida 3 yillik tajribaga ega.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Online darslar ham bormi?</div>
+      <div class="faq-answer">Hozircha faqat offline formatda o‘qitiladi.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Darslar qaysi tilda o‘tiladi?</div>
+      <div class="faq-answer">Asosan o‘zbek tilida, kerak bo‘lsa rus tilida ham tushuntiriladi.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Sinov darsi bormi?</div>
+      <div class="faq-answer">Ha, bepul sinov darsiga yozilish mumkin.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Guruhda nechta o‘quvchi bo‘ladi?</div>
+      <div class="faq-answer">O‘rtacha 8–12 nafar o‘quvchi.</div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<section class="locations">
+  <h2>Bizning manzillar</h2>
+
+  <div class="map-grid">
+
+    <div class="map-card">
+      <h3>Filial 1</h3>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2999.9473356117746!2d69.19934257577796!3d41.2447050713183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae61d776ae2009%3A0x2b9891ff3e11dfc3!2sSof%20Ta&#39;lim%20Sergeli!5e0!3m2!1suz!2s!4v1768221756165!5m2!1suz!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="map-card">
+      <h3>Filial 2</h3>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23994.651465222585!2d69.12367747910159!3d41.258119!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae89aee86a80c9%3A0x5ce34fbe4d65fb93!2sSof%20ta%60lim%20edu!5e0!3m2!1suz!2s!4v1768221922289!5m2!1suz!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+  </div>
+</section>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
