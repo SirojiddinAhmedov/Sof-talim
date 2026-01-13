@@ -92,57 +92,63 @@ const carousel = document.getElementById("carousel");
 const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
 
-const cardWidth = 280; // card + gap
 let isAnimating = false;
 
-// Boshlanishida birinchi elementni markazga tayyorlab qo‘yamiz
-carousel.style.transform = `translateX(-${cardWidth}px)`;
+function getCardWidth() {
+  const card = carousel.querySelector(".course-card");
+  const gap = 20;
+  return card.offsetWidth + gap;
+}
 
-// Oxirgi kartani boshiga olib kelamiz (doira effekti uchun)
+// boshida oxirgi cardni oldinga olib kelamiz
 carousel.insertBefore(carousel.lastElementChild, carousel.firstElementChild);
+carousel.style.transform = `translateX(-${getCardWidth()}px)`;
 
 
-// =======================
-// 👉 NEXT (o‘ngga aylanish)
-// =======================
 nextBtn.addEventListener("click", () => {
   if (isAnimating) return;
   isAnimating = true;
 
-  carousel.style.transition = "transform 0.4s ease";
-  carousel.style.transform = `translateX(-${cardWidth * 2}px)`;
+  const w = getCardWidth();
 
-  setTimeout(() => {
+  carousel.style.transition = "transform 0.4s ease";
+  carousel.style.transform = `translateX(-${w * 2}px)`;
+
+  carousel.addEventListener("transitionend", function handler() {
+    carousel.removeEventListener("transitionend", handler);
     carousel.style.transition = "none";
     carousel.appendChild(carousel.firstElementChild);
-    carousel.style.transform = `translateX(-${cardWidth}px)`;
+    carousel.style.transform = `translateX(-${w}px)`;
     isAnimating = false;
-  }, 400);
+  });
 });
 
-
-// =======================
-// 👈 PREV (chapga aylanish)
-// =======================
 prevBtn.addEventListener("click", () => {
   if (isAnimating) return;
   isAnimating = true;
 
+  const w = getCardWidth();
+
   carousel.style.transition = "none";
   carousel.insertBefore(carousel.lastElementChild, carousel.firstElementChild);
-  carousel.style.transform = `translateX(-${cardWidth * 2}px)`;
+  carousel.style.transform = `translateX(-${w * 2}px)`;
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       carousel.style.transition = "transform 0.4s ease";
-      carousel.style.transform = `translateX(-${cardWidth}px)`;
+      carousel.style.transform = `translateX(-${w}px)`;
     });
   });
 
-  setTimeout(() => {
+  carousel.addEventListener("transitionend", function handler() {
+    carousel.removeEventListener("transitionend", handler);
     isAnimating = false;
-  }, 400);
+  });
 });
+
+
+
+
 
 
 // =======================
@@ -235,3 +241,4 @@ sideMenu.querySelectorAll("a").forEach(link => {
     overlay.classList.remove("active");
   });
 });
+

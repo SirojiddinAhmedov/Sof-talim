@@ -5,6 +5,10 @@
   font-family: Arial, sans-serif;
 }
 
+|html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: #ffffff;
 }
@@ -25,12 +29,21 @@ body {
 }
 
 .logo {
+  display: flex;                /* asosiy o‘zgartirish shu */
+  align-items: center;          /* vertikal markazlash */
+  justify-content: center;      /* gorizontal markazlash */
+  gap: 12px;                    /* rasm va matn orasidagi masofa */
+  color: #ffffff;
   font-weight: bold;
   font-size: 20px;
-  background-size: contain;   /* rasm to‘liq ko‘rinadi */
-  background-repeat: no-repeat;
-  background-position: center;
+  /* agar bu header yoki navbar ichida bo‘lsa, kerak bo‘lishi mumkin: */
+  /* height: 80px; */           /* balandlik berish orqali vertikal joyni yaxshilash mumkin */
+}
 
+.logo-img {
+  height: 40px;                 /* rasm balandligini o‘zingizga moslashtiring */
+  width: auto;                  /* nisbat saqlanadi */
+  display: block;
 }
 
 
@@ -128,11 +141,9 @@ form button:hover {
 }
 
 
-/* kurslar haqida*/
 .courses {
-  margin: 120px 0px;
-  padding:120px;
-  max-height:100%;
+  margin: 80px 0;
+  padding: 60px 20px;
   text-align: center;
   background-color: #008f40;
 }
@@ -140,47 +151,139 @@ form button:hover {
 .courses h2 {
   font-size: 32px;
   margin-bottom: 30px;
-}
-
-#ruscard {
-  background-image: url();
+  color: #fff;
 }
 
 /* Wrapper */
 .carousel-wrapper {
   position: relative;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   overflow: hidden;
 }
 
-/* Carousel track */
+/* Track */
 .carousel {
   display: flex;
   gap: 20px;
-  transition: transform 30s ease-out;
+  will-change: transform;
 }
 
 /* Card */
 .course-card {
-  min-width: 300px;
-  height: 400px;
-  background: white;
+  flex: 0 0 clamp(220px, 70vw, 280px);
+  height: 340px;
+  background: #fff;
   border-radius: 14px;
   padding: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative; 
+
 }
 
-.course-card h3 {
-  margin-bottom: 10px;
+/* Buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: none;
+  font-size: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.nav-btn.left { left: -10px; }
+.nav-btn.right { right: -10px; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .nav-btn {
+    display: none;
+  }
+}
+
+/* ===== PREMIUM COURSE CARD ===== */
+
+.course-card.premium {
+  background: linear-gradient(180deg, #2b2f3a, #1f2330);
+  color: #fff;
+  padding: 60px 22px 24px;
+  text-align: left;
+  transition: 0.35s ease;
+}
+
+.course-card.premium:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+
+
+/* Bayroq aylana */
+.flag-circle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 46px;
+  height: 46px;
+  background: #111;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.flag-circle img {
+  width: 46px;
+  height: 46px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.course-card.premium h3 {
+  margin-bottom: 14px;
   font-size: 20px;
 }
 
-.course-card p {
-  color: #555;
+/* ro‘yxat */
+.course-card.premium ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.course-card.premium ul li {
+  margin-bottom: 9px;
+  font-size: 13.5px;
+  opacity: 0.9;
+  padding-left: 20px;
+  position: relative;
+}
+
+.course-card.premium ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #008f40;
+  font-size: 13px;
+}
+
+/* Tugma */
+ .course-btn {
+  margin-top: auto;
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 10px;
+  background: #008f40;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 
@@ -337,7 +440,7 @@ form button:hover {
   right: -250px;
   width: 250px;
   height: 100%;
-  background: #1fd031;
+  background: #008f40;
   padding-top: 60px;
   display: flex;
   flex-direction: column;
@@ -436,7 +539,7 @@ form button:hover {
   right: -250px;
   width: 250px;
   height: 100%;
-  background: #1fd031;
+  background: #008f40;
   padding-top: 60px;
   display: flex;
   flex-direction: column;
