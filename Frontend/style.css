@@ -19,15 +19,21 @@ body {
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: #1fd031;
+  background-color: #008f40;
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .logo {
+  background-image: url('../soptami.png');
   font-weight: bold;
   font-size: 20px;
+  background-size: contain;   /* rasm to‘liq ko‘rinadi */
+  background-repeat: no-repeat;
+  background-position: center;
+
 }
+
 
 nav a {
   margin-left: 25px;
@@ -67,7 +73,7 @@ form select {
   width: 100%;
   padding: 12px 15px;
   margin: 10px 0;
-  border: 2px solid #1fd031;
+  border: 2px solid #008f40;
   border-radius: 8px;
   font-size: 16px;
   outline: none;
@@ -77,13 +83,13 @@ form select {
 
 form input:focus,
 form select:focus {
-  border-color: #0fa020;
+  border-color: #008f40;
 }
 
 form button {
   width: 100%;
   padding: 12px;
-  background-color: #1fd031;
+  background-color: #008f40;
   color: white;
   font-size: 16px;
   border: none;
@@ -107,7 +113,7 @@ form button:hover {
   padding: 12px;
   border: none;
   border-radius: 6px;
-  background: #1fd031;
+  background: #008f40;
   color: white;
   cursor: pointer;
   scroll-behavior: smooth;
@@ -125,15 +131,20 @@ form button:hover {
 
 /* kurslar haqida*/
 .courses {
-  margin: 120px 0;
-  height: 600px;
+  margin: 120px 0px;
+  padding:120px;
+  max-height:100%;
   text-align: center;
-  background-color: #1fd031;
+  background-color: #008f40;
 }
 
 .courses h2 {
   font-size: 32px;
   margin-bottom: 30px;
+}
+
+#ruscard {
+  background-image: url();
 }
 
 /* Wrapper */
@@ -148,7 +159,7 @@ form button:hover {
 .carousel {
   display: flex;
   gap: 20px;
-  transition: transform 1s ease-out;
+  transition: transform 30s ease-out;
 }
 
 /* Card */
@@ -172,6 +183,7 @@ form button:hover {
 .course-card p {
   color: #555;
 }
+
 
 /* Buttons */
 .nav-btn {
@@ -295,20 +307,7 @@ form button:hover {
 
 
 /* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
-  background: #1fd031;
-  color: white;
-  position: relative;
-}
 
-.navbar .logo {
-  font-weight: bold;
-  font-size: 20px;
-}
 
 .nav-links a {
   color: white;
@@ -387,15 +386,6 @@ form button:hover {
 
 
 /* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
-  background: #1fd031;
-  color: white;
-  position: relative;
-}
 
 .navbar .logo {
   font-weight: bold;
