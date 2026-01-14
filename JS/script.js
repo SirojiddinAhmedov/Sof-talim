@@ -84,9 +84,7 @@ form.addEventListener("submit", async (e) => {
 
 
 
-
-
-
+// Kaurusel uchun kodlar.
 
 const carousel = document.getElementById("carousel");
 const nextBtn = document.getElementById("nextBtn");

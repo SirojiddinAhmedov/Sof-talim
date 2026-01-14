@@ -584,3 +584,125 @@ form button:hover {
     display: flex;
   }
 }
+
+
+/* ===== NOTEBOOK GLASS SECTION ===== */
+
+.notebook-stage {
+  padding: 80px 20px;
+  background:#008f40 ;  
+}
+
+.notebook-screen {
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+
+  /* Orqa fon */
+  background: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600")
+    center / cover no-repeat;
+}
+
+/* Qorong'i overlay kontrast uchun */
+.notebook-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom right,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.25)
+  );
+}
+
+/* Ichki layout */
+.glass-layout {
+  position: relative;
+  z-index: 2;
+  min-height: 70vh;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  padding: 60px;
+}
+
+/* Glass kartalar */
+.glass-main,
+.glass-box {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.08);
+  border-radius: 40px;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+/* Chap karta */
+.glass-main {
+  padding: 50px;
+}
+
+.glass-badge {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.5);
+  margin-bottom: 24px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.glass-main h2 {
+  font-size: 38px;
+  margin-bottom: 16px;
+  text-shadow: 0 0 12px rgba(255,255,255,0.4);
+}
+
+.glass-main p {
+  font-size: 17px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* O'ng ustun */
+.glass-side {
+  display: grid;
+  gap: 20px;
+}
+
+.glass-box {
+  padding: 24px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.35);
+}
+
+/* 📱 Responsive */
+@media (max-width: 900px) {
+  .glass-layout {
+    grid-template-columns: 1fr;
+    padding: 40px;
+  }
+
+  .glass-main h2 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-layout {
+    padding: 24px;
+  }
+
+  .glass-main {
+    padding: 28px;
+  }
+
+  .glass-main h2 {
+    font-size: 24px;
+  }
+}
