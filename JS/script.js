@@ -1,31 +1,67 @@
+// ========================================
+// FORM VA INPUT ELEMENTLARI
+// ========================================
 const form = document.getElementById("leadForm");
 const statusText = document.getElementById("status");
 const nameInput = document.getElementById("name");
 const phoneInput = document.getElementById("phone");
 const courseSelect = document.getElementById("course");
 
-// Inputga faqat tegishli belgilar yozilsin
+// ========================================
+// INPUT VALIDATSIYA VA FORMATLASH
+// ========================================
+
+// Ism inputi - faqat harflar va bo'sh joy
 nameInput.addEventListener("input", () => {
-  // faqat harflar va bo'sh joy qabul qilinsin
-  nameInput.value = nameInput.value.replace(/[^A-Za-zА-Яа-яЁё ]/g, "");
+  nameInput.value = nameInput.value.replace(/[^A-Za-zА-Яа-яЁёЎўҚқҒғҲҳ ]/g, "");
 });
 
-phoneInput.addEventListener("input", () => {
-  // faqat raqam yozilsin, +998 qismi o'chmasin
-  let val = phoneInput.value;
-
-  if (!val.startsWith("+998")) {
-    val = "+998";
+// Telefon inputi - avtomatik +998 bilan boshlash
+phoneInput.addEventListener("focus", () => {
+  if (!phoneInput.value) {
+    phoneInput.value = "+998";
   }
-
-  // +998 dan keyingi raqamlarni olish
-  let numbers = val.replace("+998", "").replace(/\D/g, ""); // faqat raqam
-  if (numbers.length > 9) numbers = numbers.slice(0, 9);
-
-  phoneInput.value = "+998" + numbers;
 });
 
-// Form submit
+// Telefon inputi - faqat raqamlar va formatlash
+phoneInput.addEventListener("input", (e) => {
+  let value = phoneInput.value.replace(/\D/g, "");
+  
+  if (!value.startsWith("998")) {
+    value = "998";
+  }
+  
+  if (value.length > 12) {
+    value = value.slice(0, 12);
+  }
+  
+  phoneInput.value = "+" + value;
+});
+
+// Telefon inputi - backspace bilan +998 o'chmasligi
+phoneInput.addEventListener("keydown", (e) => {
+  if (e.key === "Backspace" && phoneInput.value === "+998") {
+    e.preventDefault();
+  }
+});
+
+// ========================================
+// XABARLARNI KO'RSATISH FUNKSIYASI
+// ========================================
+function showStatus(message, isError = false) {
+  statusText.textContent = message;
+  statusText.style.color = isError ? "#ff4444" : "#4CAF50";
+  statusText.style.display = "block";
+  
+  setTimeout(() => {
+    statusText.textContent = "";
+    statusText.style.display = "none";
+  }, 5000);
+}
+
+// ========================================
+// FORM SUBMIT VA TELEGRAM GA YUBORISH
+// ========================================
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -35,26 +71,42 @@ form.addEventListener("submit", async (e) => {
 
   // Ismni tekshirish
   if (name.length < 3) {
-    statusText.textContent = "❌ Iltimos, ismingiz kamida 3 harf bo‘lsin";
+    showStatus("❌ Iltimos, ismingiz kamida 3 harf bo'lsin", true);
     return;
   }
 
-  // Telefonni tekshirish: +998 dan keyin 9 raqam
+  // Telefonni tekshirish
   const phoneNumber = phone.replace("+998", "");
   if (!/^\d{9}$/.test(phoneNumber)) {
-    statusText.textContent =
-      "❌ Iltimos, telefon raqamingiz +998 dan keyin to'qqizta raqamdan iborat bo‘lsin";
+    showStatus("❌ Iltimos, to'g'ri telefon raqam kiriting", true);
     return;
   }
 
-  // Telegramga yuborish kodi
+  // Kursni tekshirish
+  if (!course) {
+    showStatus("❌ Iltimos, kursni tanlang", true);
+    return;
+  }
+
+  // Submit tugmasini bloklash
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Yuborilmoqda...";
+
+  // DIQQAT: Bu tokenni backend serverda saqlang!
+  // Frontend kodida token saqlash XAVFLI!
   const BOT_TOKEN = "8344143650:AAGJ0EB5EyIqhPsNtT-t0GoDA9Fh5AFI9WU";
   const CHAT_ID = "1497284051";
+  
   const message = `
-📝 Ariza qoldiruvchi
+📝 Yangi ariza
+
 👤 Ismi: ${name}
-🖇  Kurs: ${course}
-📞 Telefon raqami: ${phone}
+📚 Kurs: ${course}
+📞 Telefon: ${phone}
+
+⏰ Vaqt: ${new Date().toLocaleString("uz-UZ")}
 `;
 
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
@@ -62,71 +114,89 @@ form.addEventListener("submit", async (e) => {
   try {
     const res = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json" 
+      },
       body: JSON.stringify({
         chat_id: CHAT_ID,
-        text: message,
+        text: message
       }),
     });
 
-    if (res.ok) {
-      statusText.textContent = "✅ Ariza yuborildi, tez orada bog‘lanamiz!";
+    const data = await res.json();
+    console.log("Telegram javobi:", data);
+
+    if (data.ok === true) {
+      showStatus("✅ Ariza yuborildi! Tez orada bog'lanamiz", false);
       form.reset();
-      phoneInput.value = "+998"; // telefon reset
+      phoneInput.value = "+998";
     } else {
-      statusText.textContent = "❌ Xatolik yuz berdi, qayta urinib ko‘ring";
+      console.error("Telegram xatosi:", data);
+      showStatus("❌ Xatolik yuz berdi, qayta urinib ko'ring", true);
     }
   } catch (err) {
-    statusText.textContent = "❌ Internet yoki server xatosi";
+    console.error("Yuborishda xatolik:", err);
+    showStatus("❌ Internet aloqasini tekshiring", true);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
   }
 });
 
-
-
-
-// Kaurusel uchun kodlar.
-
+// ========================================
+// KARUSEL (CAROUSEL) FUNKSIYALARI
+// ========================================
 const carousel = document.getElementById("carousel");
 const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
 
 let isAnimating = false;
+let autoSlideInterval = null;
 
+// Card kengligini olish
 function getCardWidth() {
   const card = carousel.querySelector(".course-card");
+  if (!card) return 0;
   const gap = 20;
   return card.offsetWidth + gap;
 }
 
-// boshida oxirgi cardni oldinga olib kelamiz
-carousel.insertBefore(carousel.lastElementChild, carousel.firstElementChild);
-carousel.style.transform = `translateX(-${getCardWidth()}px)`;
+// Boshlang'ich holatni sozlash
+function initCarousel() {
+  if (!carousel || carousel.children.length === 0) return;
+  
+  carousel.insertBefore(carousel.lastElementChild, carousel.firstElementChild);
+  const w = getCardWidth();
+  carousel.style.transform = `translateX(-${w}px)`;
+  carousel.style.transition = "none";
+}
 
-
-nextBtn.addEventListener("click", () => {
-  if (isAnimating) return;
+// Keyingi slaydga o'tish
+function nextSlide() {
+  if (isAnimating || !carousel) return;
   isAnimating = true;
 
   const w = getCardWidth();
-
   carousel.style.transition = "transform 0.4s ease";
   carousel.style.transform = `translateX(-${w * 2}px)`;
 
-  carousel.addEventListener("transitionend", function handler() {
+  const handler = () => {
     carousel.removeEventListener("transitionend", handler);
     carousel.style.transition = "none";
     carousel.appendChild(carousel.firstElementChild);
     carousel.style.transform = `translateX(-${w}px)`;
     isAnimating = false;
-  });
-});
+  };
 
-prevBtn.addEventListener("click", () => {
-  if (isAnimating) return;
+  carousel.addEventListener("transitionend", handler);
+}
+
+// Oldingi slaydga o'tish
+function prevSlide() {
+  if (isAnimating || !carousel) return;
   isAnimating = true;
 
   const w = getCardWidth();
-
   carousel.style.transition = "none";
   carousel.insertBefore(carousel.lastElementChild, carousel.firstElementChild);
   carousel.style.transform = `translateX(-${w * 2}px)`;
@@ -138,105 +208,223 @@ prevBtn.addEventListener("click", () => {
     });
   });
 
-  carousel.addEventListener("transitionend", function handler() {
+  const handler = () => {
     carousel.removeEventListener("transitionend", handler);
     isAnimating = false;
+  };
+
+  carousel.addEventListener("transitionend", handler);
+}
+
+// Tugmalar uchun event listener
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    stopAutoSlide();
+    nextSlide();
+    startAutoSlide();
   });
-});
+}
 
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    stopAutoSlide();
+    prevSlide();
+    startAutoSlide();
+  });
+}
 
+// ========================================
+// AUTO ROTATE FUNKSIYALARI
+// ========================================
+function startAutoSlide() {
+  stopAutoSlide();
+  autoSlideInterval = setInterval(() => {
+    nextSlide();
+  }, 3000);
+}
 
+function stopAutoSlide() {
+  if (autoSlideInterval) {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = null;
+  }
+}
 
-
-
-// =======================
-// 🔁 AUTO ROTATE (doira bo‘ylab)
-// =======================
-let autoSlide = setInterval(() => {
-  nextBtn.click();
-}, 3000);
-
-
-// =======================
-// 🤏 DRAG / SWIPE
-// =======================
+// ========================================
+// DRAG VA SWIPE FUNKSIYALARI
+// ========================================
 let startX = 0;
 let isDragging = false;
 
-carousel.addEventListener("mousedown", startDrag);
-carousel.addEventListener("touchstart", startDrag);
-
-carousel.addEventListener("mouseup", endDrag);
-carousel.addEventListener("touchend", endDrag);
+function getX(e) {
+  return e.type.includes("mouse") ? e.pageX : e.changedTouches[0].clientX;
+}
 
 function startDrag(e) {
-  clearInterval(autoSlide);
+  stopAutoSlide();
   isDragging = true;
   startX = getX(e);
+  if (carousel) {
+    carousel.style.cursor = "grabbing";
+  }
 }
 
 function endDrag(e) {
   if (!isDragging) return;
   isDragging = false;
 
+  if (carousel) {
+    carousel.style.cursor = "grab";
+  }
+
   const endX = getX(e);
   const diff = startX - endX;
 
-  if (diff > 50) nextBtn.click();
-  else if (diff < -50) prevBtn.click();
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) {
+      nextSlide();
+    } else {
+      prevSlide();
+    }
+  }
 
-  autoSlide = setInterval(() => {
-    nextBtn.click();
-  }, 3000);
+  startAutoSlide();
 }
 
-function getX(e) {
-  return e.type.includes("mouse") ? e.pageX : e.changedTouches[0].clientX;
+// Drag event'larni qo'shish
+if (carousel) {
+  carousel.style.cursor = "grab";
+  
+  carousel.addEventListener("mousedown", startDrag);
+  carousel.addEventListener("touchstart", startDrag, { passive: true });
+  
+  carousel.addEventListener("mouseup", endDrag);
+  carousel.addEventListener("touchend", endDrag);
+  carousel.addEventListener("mouseleave", endDrag);
+  
+  // Drag paytida rasm sudrab ketishini oldini olish
+  carousel.addEventListener("dragstart", (e) => e.preventDefault());
 }
 
+// ========================================
+// WINDOW RESIZE HANDLERI
+// ========================================
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    if (carousel) {
+      const w = getCardWidth();
+      carousel.style.transition = "none";
+      carousel.style.transform = `translateX(-${w}px)`;
+    }
+  }, 100);
+});
 
+// ========================================
+// FAQ ACCORDION
+// ========================================
 const faqItems = document.querySelectorAll(".faq-item");
 
 faqItems.forEach(item => {
   const question = item.querySelector(".faq-question");
-
-  question.addEventListener("click", () => {
-
-    // boshqalar yopilsin (accordion effekt)
-    faqItems.forEach(i => {
-      if (i !== item) i.classList.remove("active");
+  
+  if (question) {
+    question.addEventListener("click", () => {
+      // Boshqa barcha faq'larni yopish
+      faqItems.forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove("active");
+        }
+      });
+      
+      // Bosilgan faq'ni ochish/yopish
+      item.classList.toggle("active");
     });
-
-    item.classList.toggle("active");
-  });
+  }
 });
 
-
-
+// ========================================
+// MOBILE MENU (BURGER)
+// ========================================
 const burger = document.getElementById("burger");
 const sideMenu = document.getElementById("sideMenu");
 const overlay = document.getElementById("overlay");
 
-// Burger bosilganda animatsiya va drawer
-burger.addEventListener("click", () => {
-  burger.classList.toggle("active");      // X animatsiya
-  sideMenu.classList.toggle("active");    // drawer ochish
-  overlay.classList.toggle("active");     // overlay
-});
+// Menyuni ochish/yopish
+function toggleMenu() {
+  if (burger) burger.classList.toggle("active");
+  if (sideMenu) sideMenu.classList.toggle("active");
+  if (overlay) overlay.classList.toggle("active");
+  
+  // Body scroll'ni boshqarish
+  document.body.style.overflow = sideMenu && sideMenu.classList.contains("active") ? "hidden" : "";
+}
 
-// Overlay bosilganda menyu yopilsin
-overlay.addEventListener("click", () => {
-  burger.classList.remove("active");
-  sideMenu.classList.remove("active");
-  overlay.classList.remove("active");
-});
+// Menyuni yopish
+function closeMenu() {
+  if (burger) burger.classList.remove("active");
+  if (sideMenu) sideMenu.classList.remove("active");
+  if (overlay) overlay.classList.remove("active");
+  document.body.style.overflow = "";
+}
 
-// Link bosilganda menyu yopilsin
-sideMenu.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    burger.classList.remove("active");
-    sideMenu.classList.remove("active");
-    overlay.classList.remove("active");
+// Burger tugmasi
+if (burger) {
+  burger.addEventListener("click", toggleMenu);
+}
+
+// Overlay bosilganda
+if (overlay) {
+  overlay.addEventListener("click", closeMenu);
+}
+
+// Menu linklari bosilganda
+if (sideMenu) {
+  sideMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      closeMenu();
+      
+      // Smooth scroll uchun
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        const target = document.querySelector(href);
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: "smooth" });
+          }, 300);
+        }
+      }
+    });
   });
+}
+
+// ESC tugmasi bilan yopish
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && sideMenu && sideMenu.classList.contains("active")) {
+    closeMenu();
+  }
 });
 
+// ========================================
+// SAHIFA YUKLANGANDA ISHGA TUSHIRISH
+// ========================================
+document.addEventListener("DOMContentLoaded", () => {
+  // Karuselni ishga tushirish
+  initCarousel();
+  startAutoSlide();
+  
+  // Telefon inputiga default qiymat
+  if (phoneInput && !phoneInput.value) {
+    phoneInput.value = "+998";
+  }
+  
+  console.log("✅ Sahifa to'liq yuklandi va skript ishladi");
+});
+
+// ========================================
+// SAHIFA YOPILGANDA TOZALASH
+// ========================================
+window.addEventListener("beforeunload", () => {
+  stopAutoSlide();
+});

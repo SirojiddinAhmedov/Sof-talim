@@ -42,32 +42,29 @@
 		<div class="overlay" id="overlay"></div>
 
 		<!-- Hero -->
-		<section class="hero" id="leadForm">
+		<section class="hero">
 			<h1>Kursga yoziling</h1>
-			<p>Ma'lumot qoldiring, menejerlar siz bilan bog‘lanadi</p>
+			<p>Ma'lumot qoldiring, menejerlar siz bilan bog'lanadi</p>
 
-			<form class="form">
+			<form class="form" id="leadForm">
 				<input type="text" id="name" placeholder="Ismingiz" maxlength="50" required />
 
-				<!-- Kurs select -->
 				<select id="course" required>
 					<option value="" disabled selected>Kursni tanlang</option>
-					<option value="rus"> Rus tili</option>
-					<option value="ingliz">Ingliz tili</option>
-					<option value="arab">Arab tili</option>
-					<option value="matematika">Matematika</option>
-					<option value="turk">Turk tili</option>
-					<option value="pochemuchka">Pochemuchka</option>
+					<option value="Rus tili">Rus tili</option>
+					<option value="Ingliz tili">Ingliz tili</option>
+					<option value="Arab tili">Arab tili</option>
+					<option value="Matematika">Matematika</option>
+					<option value="Turk tili">Turk tili</option>
+					<option value="Pochemuchka">Pochemuchka</option>
 				</select>
 
-				<input type="tel" id="phone" placeholder="+998 ___ ___ ___" value="+998" maxlength="13" required />
+				<input type="tel" id="phone" placeholder="+998 ___ ___ ___" maxlength="13" required />
 
 				<button type="submit">Yuborish</button>
 			</form>
 
-			<div id="status"></div>
-
-			<p id="status" class="status"></p>
+			<p id="status"></p>
 		</section>
 
 		<!-- Kurslar haqida  -->
@@ -323,6 +320,38 @@
 				</div>
 			</div>
 		</section>
+
+		<footer class="footer">
+			<div class="footer-container">
+
+				<div class="footer-box">
+					<h3>Sof Ta'lim</h3>
+					<p>Zamonaviy bilimlar, real natijalar. IT va til kurslari orqali kelajakni birga quramiz.</p>
+				</div>
+
+				<div class="footer-box">
+					<h4>Aloqa</h4>
+					<p>📞 +998 90 123 45 67</p>
+					<p>📍 Toshkent shahri</p>
+					<p>🕒 09:00 - 20:00</p>
+				</div>
+
+				<div class="footer-box">
+					<h4>Ijtimoiy tarmoqlar</h4>
+					<div class="social-links">
+						<a href="https://t.me/username" target="_blank">Telegram</a>
+						<a href="https://instagram.com/username" target="_blank">Instagram</a>
+						<a href="https://youtube.com/@username" target="_blank">YouTube</a>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="footer-bottom">
+				© 2026  Sof Ta'lim o'quv markazi. Barcha huquqlar himoyalangan.
+			</div>
+</footer>
+
 
 		<script src="JS/script.js"></script>
 	</body>
