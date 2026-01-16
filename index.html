@@ -17,10 +17,10 @@
 			</div>
 
 			<nav class="nav-links">
-				<a href="#">Home</a>
-				<a href="#">Kurslar</a>
-				<a href="#">Price</a>
-				<a href="#">Biz haqimizda</a>
+				<a href="#">Ro'yxatdan o'tish</a>
+				<a href="#coursed">Kurslar</a>
+				<a href="#aboutUs">Biz haqimizda</a>
+				<a href="#faq">FAQ</a>
 			</nav>
 
 			<div class="burger" id="burger">
@@ -32,21 +32,21 @@
 
 		<!-- Yon menyu drawer -->
 		<div class="side-menu" id="sideMenu">
-			<a href="#">Home</a>
-			<a href="#">Course</a>
-			<a href="#">Price</a>
-			<a href="#">About Us</a>
+			<a href="#hero">Home</a>
+			<a href="#coursed">Course</a>
+			<a href="#aboutUs">Biz haqimizda</a>
+			<a href="#faq">FAQ</a>
 		</div>
 
 		<!-- Overlay -->
 		<div class="overlay" id="overlay"></div>
 
 		<!-- Hero -->
-		<section class="hero">
+		<section class="hero" id="hero">
 			<h1>Kursga yoziling</h1>
 			<p>Ma'lumot qoldiring, menejerlar siz bilan bog'lanadi</p>
 
-			<form class="form" id="leadForm">
+			<form class="form" id="hero">
 				<input type="text" id="name" placeholder="Ismingiz" maxlength="50" required />
 
 				<select id="course" required>
@@ -68,7 +68,7 @@
 		</section>
 
 		<!-- Kurslar haqida  -->
-		<section class="courses">
+		<section class="courses" id="coursed">
 			<h2>Bizning kurslar</h2>
 
 			<div class="carousel-wrapper">
@@ -90,7 +90,7 @@
 							<li>Natijaga yo‘naltirilgan metodika</li>
 						</ul>
 
-						<a href="#leadForm">
+						<a href="#hero">
 							<button class="course-btn">Ro‘yxatdan o‘tish</button>
 						</a>
 					</div>
@@ -110,7 +110,7 @@
 							<li>0 dan boshlab IELTS’gacha tizimli yo'nalish</li>
 						</ul>
 
-						<a href="#leadForm">
+						<a href="#hero">
 							<button class="course-btn">Ro‘yxatdan o‘tish</button>
 						</a>
 					</div>
@@ -130,7 +130,7 @@
 							<li>Tezkor so'zlashuv metodikasi</li>
 						</ul>
 
-						<a href="#leadForm">
+						<a href="#hero">
 							<button class="course-btn">Ro‘yxatdan o‘tish</button>
 						</a>
 					</div>
@@ -150,7 +150,7 @@
 							<li>Diniy va dunyoviy adabiyotlarni tushunish darajasi</li>
 						</ul>
 
-						<a href="#leadForm">
+						<a href="#hero">
 							<button class="course-btn">Ro‘yxatdan o‘tish</button>
 						</a>
 					</div>
@@ -170,7 +170,7 @@
 							<li>Boshlang'ich savodxonlik va hisoblash sirlari</li>
 						</ul>
 
-						<a href="#leadForm">
+						<a href="#hero">
 							<button class="course-btn">Ro‘yxatdan o‘tish</button>
 						</a>
 					</div>
@@ -189,7 +189,7 @@
 							<li>Har bir o'quvchi bilan individual tahlil</li>
 						</ul>
 
-						<a href="#leadForm" class="leadorm">
+						<a href="#hero" class="leadorm">
 							<button class="course-btn">Ro‘yxatdan o‘tish</button>
 						</a>
 					</div>
@@ -199,7 +199,7 @@
 			</div>
 		</section>
 
-		<section class="faq">
+		<section class="faq" id="faq">
 			<h2>Ko‘p beriladigan savollar</h2>
 
 			<div class="faq-list">
@@ -255,36 +255,36 @@
 			</div>
 		</section>
 
-		<section class="notebook-stage">
+		<section class="notebook-stage" id="aboutUs">
 
-        <div class="notebook-screen">
+					<div class="notebook-screen">
 
-    <div class="glass-layout">
+				<div class="glass-layout">
 
-      <!-- Chap katta karta -->
-      <div class="glass-main">
-        <span class="glass-badge">2 ta filial</span>
+				<!-- Chap katta karta -->
+				<div class="glass-main">
+					<span class="glass-badge">2 ta filial</span>
 
-        <h2>Bilim nurini yoqamiz</h2>
-        <p>
-          Zamonaviy muhit, sifatli metodika va ishonchli natija.
-          Har bir o‘quvchi uchun individual yondashuv.
-        </p>
-      </div>
+					<h2>Bilim nurini yoqamiz</h2>
+					<p>
+					Zamonaviy muhit, sifatli metodika va ishonchli natija.
+					Har bir o‘quvchi uchun individual yondashuv.
+					</p>
+				</div>
 
-      <!-- O‘ng kartalar -->
-      <div class="glass-side">
+						<!-- O‘ng kartalar -->
+						<div class="glass-side">
 
-        <div class="glass-box">Xodimlar soni:25+</div>
-        <div class="glass-box">6 ta yo‘nalish</div>
-        <div class="glass-box">Since 2024</div>
-        <div class="glass-box">Bitiruvchilar 1000+</div>
+							<div class="glass-box">Xodimlar soni:25+</div>
+							<div class="glass-box">6 ta yo‘nalish</div>
+							<div class="glass-box">Since 2024</div>
+							<div class="glass-box">Bitiruvchilar 1000+</div>
 
-      </div>
+						</div>
 
-    </div>
+				</div>
 
-        </div>
+					</div>
 
         </section>
 
@@ -350,7 +350,7 @@
 			<div class="footer-bottom">
 				© 2026  Sof Ta'lim o'quv markazi. Barcha huquqlar himoyalangan.
 			</div>
-</footer>
+        </footer>
 
 
 		<script src="JS/script.js"></script>
