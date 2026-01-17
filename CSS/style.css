@@ -39,11 +39,15 @@ body {
   /* agar bu header yoki navbar ichida bo‘lsa, kerak bo‘lishi mumkin: */
   /* height: 80px; */           /* balandlik berish orqali vertikal joyni yaxshilash mumkin */
 }
+.logo span{
+  cursor: pointer;
+}
 
 .logo-img {
   height: 40px;                 /* rasm balandligini o‘zingizga moslashtiring */
   width: auto;                  /* nisbat saqlanadi */
   display: block;
+  cursor: pointer;
 }
 
 
