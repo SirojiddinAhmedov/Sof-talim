@@ -188,7 +188,6 @@ form button:hover {
   gap: 20px;
   align-items: center;
   will-change: transform;
-  height: 70vh;
   background-color: #008f40;
 }
 
