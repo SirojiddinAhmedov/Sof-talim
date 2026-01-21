@@ -179,13 +179,17 @@ form button:hover {
   max-width: 1100px;
   margin: 0 auto;
   overflow: hidden;
+  background-color: #008f40;
 }
 
 /* Track */
 .carousel {
   display: flex;
   gap: 20px;
+  align-items: center;
   will-change: transform;
+  height: 70vh;
+  background-color: #008f40;
 }
 
 /* Card */
