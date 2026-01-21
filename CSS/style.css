@@ -789,6 +789,14 @@ form button:hover {
     display: inline-block;
     margin: 5px 10px;
   }
+
+  
+  .footer-box p {
+  line-height: 1.6;
+  font-size: 14px;
+  display: inline-block;
+  margin: 5px 10px;
+}
 }
 
 
