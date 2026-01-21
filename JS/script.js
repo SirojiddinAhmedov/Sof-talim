@@ -428,3 +428,18 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("beforeunload", () => {
   stopAutoSlide();
 });
+
+
+//Scroling uchun cod
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".course-btn");
+  if (!btn) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+
+
