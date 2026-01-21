@@ -442,4 +442,197 @@ document.addEventListener("click", (e) => {
 });
 
 
+// ____________________________________________________
+// Ballar jadvali uchun Google sheetdan ma'lumot olish
+// ______________________________________________________________\
 
+const API_URL = "https://script.google.com/macros/s/AKfycbw1D5wIk9tZWz_u2_2QlcRm17GtLnDXrQ5tg8YT5zaJjpaNB05QqOelZ9Fh9b4YZRVQ/exec";
+
+const metaEl = document.getElementById("meta");
+const listEl = document.getElementById("list");
+const errEl = document.getElementById("err");
+const searchEl = document.getElementById("search");
+const searchResultEl = document.getElementById("searchResult");
+
+let rows = [];        // sorted rows
+let indexRows = [];   // for search
+let greenKey = null;  // current green-highlighted row key
+
+function escapeHtml(s) {
+  return String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function setGreen(el, on) {
+  if (!el) return;
+  // Yashil highlight (CSS qo'shmasdan, JS bilan)
+  el.style.background = on ? "#dcfce7" : ""; // light green
+  el.style.borderColor = on ? "#86efac" : "";
+}
+
+function clearGreen() {
+  if (!greenKey) return;
+  const prev = listEl.querySelector(`[data-key="${CSS.escape(greenKey)}"]`);
+  setGreen(prev, false);
+  greenKey = null;
+}
+
+function makeKey(name, points, idx) {
+  return `${name}__${points}__${idx}`;
+}
+
+function renderList(data) {
+  listEl.innerHTML = "";
+
+  data.forEach((u) => {
+    const item = document.createElement("div");
+    item.className = "item";
+    item.dataset.key = u.key;
+
+    item.innerHTML = `
+      <div class="rank">
+        <span class="medal">${u.pos === 1 ? "🥇" : u.pos === 2 ? "🥈" : u.pos === 3 ? "🥉" : ""}</span>
+        <span>#${u.pos}</span>
+      </div>
+      <div class="name" title="${escapeHtml(u.name)}">${escapeHtml(u.name)}</div>
+      <div class="points">${u.points} ball</div>
+    `;
+
+    listEl.appendChild(item);
+  });
+
+  // Agar qidiruvdan keyin yashil row saqlansin
+  if (greenKey) {
+    const el = listEl.querySelector(`[data-key="${CSS.escape(greenKey)}"]`);
+    setGreen(el, true);
+  }
+}
+
+function scrollToKey(key) {
+  const el = listEl.querySelector(`[data-key="${CSS.escape(key)}"]`);
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function showSearchResult(found) {
+  if (!found) {
+    searchResultEl.classList.add("hidden");
+    searchResultEl.innerHTML = "";
+    return;
+  }
+
+  searchResultEl.classList.remove("hidden");
+  searchResultEl.innerHTML = `
+    <div class="row">
+      <div>
+        <b>${escapeHtml(found.name)}</b><br/>
+        <span>O‘rin: <b>#${found.pos}</b> | Ball: <b>${found.points}</b></span>
+      </div>
+      <button class="btn" id="showBtn">Ko‘rsatish</button>
+    </div>
+  `;
+
+  document.getElementById("showBtn").addEventListener("click", () => {
+    // Ko‘rsatish bosilganda ham yashil bo‘lib tursin + scroll
+    clearGreen();
+    greenKey = found.key;
+    const el = listEl.querySelector(`[data-key="${CSS.escape(greenKey)}"]`);
+    setGreen(el, true);
+    scrollToKey(greenKey);
+  });
+}
+
+function findBestMatch(qLower) {
+  // 1) Avval exact match (butun ism teng)
+  const exact = indexRows.find(r => r.nameLower === qLower);
+  if (exact) return exact;
+
+  // 2) Keyin partial match (ichida bor)
+  const partial = indexRows.find(r => r.nameLower.includes(qLower));
+  return partial || null;
+}
+
+async function load() {
+  try {
+    errEl.textContent = "";
+    metaEl.textContent = "Yuklanmoqda...";
+
+    const res = await fetch(API_URL + "?t=" + Date.now());
+    if (!res.ok) throw new Error("API javobi xato: " + res.status);
+
+    const json = await res.json();
+    const raw = Array.isArray(json.data) ? json.data : [];
+
+    // Muhim: sheet tartibi (idx) saqlanadi.
+    const normalized = raw
+      .map((x, idx) => ({
+        name: String(x.name ?? "").trim(),
+        points: Number(x.points) || 0,
+        idx // sheetdagi original tartib: kichik idx = oldin yozilgan
+      }))
+      .filter(x => x.name.length > 0);
+
+    // Sort: ball DESC, teng bo'lsa sheet tartibi ASC (idx)
+    normalized.sort((a, b) => {
+      if (b.points !== a.points) return b.points - a.points;
+      return a.idx - b.idx;
+    });
+
+    // Bu yerda raqamlar UNIQUE bo‘ladi: #1, #2, #3...
+    rows = normalized.map((x, i) => ({
+      name: x.name,
+      points: x.points,
+      idx: x.idx,
+      pos: i + 1,
+      key: makeKey(x.name, x.points, x.idx)
+    }));
+
+    indexRows = rows.map(r => ({ ...r, nameLower: r.name.toLowerCase() }));
+
+    renderList(rows);
+    metaEl.textContent = `Yangilangan: ${new Date(json.updatedAt || Date.now()).toLocaleString("uz-UZ")}`;
+
+    // Qidiruv holatini saqlab qolamiz (xohlasangiz reset qilamiz)
+    // searchEl.value = "";
+    // showSearchResult(null);
+
+  } catch (e) {
+    metaEl.textContent = "Yuklab bo‘lmadi.";
+    errEl.textContent = "Xatolik: " + e.message;
+  }
+}
+
+// Qidiruv:
+// - ro‘yxat o‘rni o‘zgarmaydi
+// - topilgan o‘quvchi qatori yashil bo‘ladi
+// - Ko‘rsatish bosilganda scroll bo‘ladi va yashil qoladi
+searchEl.addEventListener("input", () => {
+  const q = searchEl.value.trim();
+  const qLower = q.toLowerCase();
+
+  if (!q) {
+    clearGreen();
+    showSearchResult(null);
+    return;
+  }
+
+  const found = findBestMatch(qLower);
+
+  clearGreen();
+  if (found) {
+    greenKey = found.key;
+    const el = listEl.querySelector(`[data-key="${CSS.escape(greenKey)}"]`);
+    setGreen(el, true);
+  }
+
+  showSearchResult(found);
+});
+
+load();
+
+// xohlasangiz avtomatik yangilanish:
+setInterval(load, 30000);
