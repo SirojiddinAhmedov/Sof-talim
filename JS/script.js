@@ -636,3 +636,55 @@ load();
 
 // xohlasangiz avtomatik yangilanish:
 setInterval(load, 30000);
+
+ (function () {
+    const scroller = document.querySelector(".gifts__scroller");
+    if (!scroller) return;
+
+    scroller.addEventListener("wheel", (e) => {
+      // Shift bosilmagan bo'lsa ham gorizontalga o'tkazamiz
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        scroller.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+  })();
+
+  // ====================================
+  // Sovg'lar kartochkasi uchun joy
+  // ======================================
+
+//   const gifts = [
+//   { img: "phone.png",  name: "Telefon",    points: 1000 },
+//   { img: "headphones.png", name: "Quloqchin", points: 600 },
+//   { img: "powerbank.png", name: "Powerbank", points: 450 },
+//   { img: "backpack.png", name: "Ryukzak", points: 800 },
+//   { img: "keyboard.png", name: "Klaviatura", points: 550 },
+//   { img: "mouse.png", name: "Sichqoncha", points: 300 },
+//   { img: "phone.png",  name: "Telefon",    points: 1000 },
+//   { img: "headphones.png", name: "Quloqchin", points: 600 },
+//   { img: "powerbank.png", name: "Powerbank", points: 450 },
+//   { img: "backpack.png", name: "Ryukzak", points: 800 },
+//   { img: "keyboard.png", name: "Klaviatura", points: 550 },
+//   { img: "mouse.png", name: "Sichqoncha", points: 300 },
+//   // xohlagancha qo‘shaverasan
+// ];
+
+// const basePath = "images/gifts/"; // hamma rasm shu papkada
+
+// const container = document.getElementById("giftsContainer");
+
+// container.innerHTML = gifts.map(gift => `
+//   <article class="gift">
+//     <div class="gift__imgWrap">
+//       <img class="gift__img"
+//            src="${basePath}${gift.img}"
+//            alt="${gift.name}"
+//            loading="lazy">
+//     </div>
+//     <div class="gift__meta">
+//       <div class="gift__name">${gift.name}</div>
+//       <div class="gift__points"> ⭐️ ${gift.points} ball</div>
+//     </div>
+//   </article>
+// `).join("");

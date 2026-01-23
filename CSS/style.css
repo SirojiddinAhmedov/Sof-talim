@@ -959,3 +959,130 @@ form button:hover {
   color: #b00020;
   font-size: 14px;
 }
+/* ===== Sovg'alar bo'limi ===== */
+.gifts {
+  width: 100%;
+  padding: 18px 0 6px;
+}
+
+.gifts__head {
+  margin: 0 0 10px;
+  background-color: #38bdf8;
+  padding: 10px;
+}
+
+.gifts__title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.gifts__subtitle {
+  margin: 6px 0 0;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+/* Skroll konteyner: gorizontal + snap + responsiv kartalar */
+.gifts__scroller {
+  --gap: 10px;
+  --card-radius: 12px;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - (var(--gap) * 3)) / 4); /* default: telefon 4ta */
+  gap: var(--gap);
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 2px 12px;
+
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 2px;
+  -webkit-overflow-scrolling: touch;
+
+  /* scrollbar (ixtiyoriy) */
+  scrollbar-width: thin;
+}
+
+.gifts__scroller:focus {
+  outline: 2px solid rgba(0,0,0,0.15);
+  outline-offset: 4px;
+  border-radius: 10px;
+}
+
+/* Kartochka */
+.gift {
+  scroll-snap-align: start;
+
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: var(--card-radius);
+  background: #fff;
+
+  display: grid;
+  grid-template-rows: 1fr auto;
+  overflow: hidden;
+
+  /* hover faqat pointer qurilmalarda */
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  }
+}
+
+.gift__imgWrap {
+  aspect-ratio: 1 / 1; /* kvadrat */
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01));
+}
+
+.gift__img {
+  width: 72%;
+  height: 72%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.gift__meta {
+  padding: 8px 8px 10px;
+  display: grid;
+  gap: 4px;
+}
+
+.gift__name {
+  font-size: 12px;
+  line-height: 1.1;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gift__points {
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+/* Kattaroq ekranlarda ko'proq ko'rsatamiz:
+   notebookda 8ta atrofida */
+/* @media (min-width: 900px) {
+  .gifts__scroller {
+    grid-auto-columns: calc((100% - (var(--gap) * 7)) / 8);
+  }
+} */
+
+/* Juda katta desktopda biroz kattaroq ko'rinsin (ixtiyoriy) */
+/* @media (min-width: 1300px) {
+  .gifts__scroller {
+    --gap: 12px;
+  }
+  .gifts__title { font-size: 20px; }
+} */
