@@ -673,27 +673,27 @@ setInterval(load, 30000);
 
  
   const gifts = [
-  { img: "choco.png", name: "Shokolad", points: 400 }, // Kitob, shokolad...
-  { img: "airpod.png", name: "Airpods", points: 1500 }, // Air Pods, barni...
-  { img: "sichqon.png", name: "Sichqoncha", points: 700 }, // Kichik aksessuarlar uchun taxminiy
-  { img: "voucher.png", name: "Chegirma", points: 1600 }, // 50% chegirmali vaucher
-  { img: "quloqchin.png", name: "Quloqchin", points: 1700 }, // Naushnik (16 Sof Pul)
-  { img: "bank.png", name: "Powerbank", points: 900 }, // Naushnik bilan bir xil toifa
-  { img: "velosiped.png", name: "Velosiped", points: 6000 }, // Velosiped
-  { img: "vivo.png", name: "Telefon", points: 8000 }, // Smartfon Vivo Y04
-  { img: "samokat.png", name: "Elektro Samokat", points: 12800 }, // Elektro Samokat
-  { img: "dell.png", name: "Dell Notebook", points: 52000 }, // Noutbuk Dell Inspiron
-  { img: "iphone.png", name: "Apple", points: 57200 }, // Apple iPhone 15
+  { img: "choco.jpg", name: "Shokolad", points: 400 }, // Kitob, shokolad...
+  { img: "airpods.jpg", name: "Airpods", points: 1500 }, // Air Pods, barni...
+  { img: "mause.jpg", name: "Sichqoncha", points: 700 }, // Kichik aksessuarlar uchun taxminiy
+  { img: "vaucher.jpg", name: "Chegirma", points: 1600 }, // 50% chegirmali vaucher
+  { img: "headphone.jpg", name: "Quloqchin", points: 1700 }, // Naushnik (16 Sof Pul)
+  { img: "bank.jpg", name: "Powerbank", points: 900 }, // Naushnik bilan bir xil toifa
+  { img: "bike.jpg", name: "Velosiped", points: 6000 }, // Velosiped
+  { img: "vivo.jpg", name: "Telefon", points: 8000 }, // Smartfon Vivo Y04
+  { img: "samokad.jpg", name: "Elektro Samokat", points: 12800 }, // Elektro Samokat
+  { img: "dell.jpg", name: "Dell Notebook", points: 52000 }, // Noutbuk Dell Inspiron
+  { img: "iphone.jpg", name: "Apple", points: 57200 }, // Apple iPhone 15
 
   // Qolgan elementlar (rasmda nomi chiqmaganlari uchun o'rtacha mantiqiy ballar):
-  { img: "keyboard.png", name: "Klaviatura", points: 1000 }, 
-  { img: "book.png", name: "To'plam", points: 1000 },
-  { img: "cap.png", name: "Bosh kiyim", points: 450 },
-  { img: "xo.png", name: "XO o'yini", points: 500 },
-  { img: "bokk1.png", name: "Dunyo Daholari", points: 520 },
-  { img: "kubik.png", name: "Kubik-Rubik", points: 800 },
-  { img: "yandekstan.png", name: "AI suhbatdosh", points: 3000 },
-  { img: "bag.png", name: "Ryukzak", points: 2000 }
+  { img: "keybord.jpg", name: "Klaviatura", points: 1000 }, 
+  { img: "toplam.jpg", name: "To'plam", points: 1000 },
+  { img: "cap.jpg", name: "Bosh kiyim", points: 450 },
+  { img: "xo.jpg", name: "XO o'yini", points: 500 },
+  { img: "book.jpg", name: "Dunyo Daholari", points: 520 },
+  { img: "cub.jpg", name: "Kubik-Rubik", points: 800 },
+  { img: "yandekstan.jpg", name: "AI suhbatdosh", points: 3000 },
+  { img: "bag.jpg", name: "Ryukzak", points: 2000 }
 ].sort((a, b) => a.points - b.points); // Kichigidan kattasiga tartiblash
                   
             
