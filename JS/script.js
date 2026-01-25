@@ -59,80 +59,107 @@ function showStatus(message, isError = false) {
   }, 5000);
 }
 
-// try {
-//   const res = await fetch("http://localhost:3000/api/lead", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({
-//       name,
-//       phone,
-//       course,
-//     }),
-//   });
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-//   const data = await res.json();
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const course = courseSelect.value.trim();
 
-//   if (data.ok === true) {
-//     showStatus("✅ Ariza yuborildi! Tez orada bog'lanamiz", false);
-//     form.reset();
-//     phoneInput.value = "+998";
-//   } else {
-//     showStatus("❌ Xatolik yuz berdi, qayta urinib ko'ring", true);
-//   }
-// } catch (err) {
-//   console.error("Yuborishda xatolik:", err);
-//   showStatus("❌ Internet aloqasini tekshiring", true);
-// } finally {
-//   submitBtn.disabled = false;
-//   submitBtn.textContent = originalText;
-// }
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Yuborilmoqda...";
 
-// ... yuqoridagi validatsiya kodlari qoladi ...
+  const BOT_TOKEN = "8209490453:AAGh1NE356FGya857OQLwwBD3yglQD_PFZ4";
+  const CHAT_ID = "1643264376";
+
+  const message =
+`📝 Yangi ariza
+
+👤 Ismi: ${name}
+📚 Kurs: ${course}
+📞 Telefon: ${phone}
+
+⏰ Vaqt: ${new Date().toLocaleString("uz-UZ")}`;
+
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: CHAT_ID, text: message }),
+    });
+
+    const data = await res.json();
+
+    if (data.ok) {
+      showStatus("✅ Ariza yuborildi! Tez orada bog'lanamiz", false);
+      form.reset();
+      phoneInput.value = "+998";
+    } else {
+      showStatus("❌ Xatolik: Telegram javobi ok emas", true);
+      console.log(data);
+    }
+  } catch (err) {
+    console.error(err);
+    showStatus("❌ Internet/Telegram ulanish xatosi", true);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
+});
+
+
+
 
 // Mavjud validatsiya kodlari (Ism, Telefon) tepada qoladi...
 
-const submitBtn = form.querySelector("button"); // Tugmani aniqlab olamiz
+// const submitBtn = form.querySelector("button"); // Tugmani aniqlab olamiz
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+// form.addEventListener("submit", async (e) => {
+//     e.preventDefault();
 
-    const originalText = submitBtn.textContent;
-    const name = nameInput.value;
-    const phone = phoneInput.value;
-    const course = courseSelect.value;
+//     const originalText = submitBtn.textContent;
+//     const name = nameInput.value;
+//     const phone = phoneInput.value;
+//     const course = courseSelect.value;
 
-    // Tugmani vaqtincha muzlatamiz
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Yuborilmoqda...";
+//     // Tugmani vaqtincha muzlatamiz
+//     submitBtn.disabled = true;
+//     submitBtn.textContent = "Yuborilmoqda...";
 
-    try {
-        const res = await fetch("http://localhost:3000/api/lead", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, phone, course }),
-        });
+//     try {
+//         const res = await fetch("http://localhost:3000/api/lead", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({ name, phone, course }),
+//         });
 
-        const data = await res.json();
+//         const data = await res.json();
 
-        if (data.ok) {
-            // 1. Yashil xabarni ko'rsatish
-            showStatus("✅ Ariza yuborildi! Tez orada bog'lanamiz", false);
+//         if (data.ok) {
+//             // 1. Yashil xabarni ko'rsatish
+//             showStatus("✅ Ariza yuborildi! Tez orada bog'lanamiz", false);
             
-            // 2. Inputlarni tozalash
-            form.reset(); 
-            phoneInput.value = "+998"; // Telefonni boshlang'ich holatga qaytarish
-        } else {
-            showStatus("❌ Xatolik yuz berdi, qayta urinib ko'ring", true);
-        }
-    } catch (err) {
-        console.error("Yuborishda xatolik:", err);
-        showStatus("❌ Server bilan aloqa uzildi", true);
-    } finally {
-        // Tugmani yana faollashtiramiz
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-    }
-});
+//             // 2. Inputlarni tozalash
+//             form.reset(); 
+//             phoneInput.value = "+998"; // Telefonni boshlang'ich holatga qaytarish
+//         } else {
+//             showStatus("❌ Xatolik yuz berdi, qayta urinib ko'ring", true);
+//         }
+//     } catch (err) {
+//         console.error("Yuborishda xatolik:", err);
+//         showStatus("❌ Server bilan aloqa uzildi", true);
+//     } finally {
+//         // Tugmani yana faollashtiramiz
+//         submitBtn.disabled = false;
+//         submitBtn.textContent = originalText;
+//     }
+// });
+
+
 // ========================================
 // KARUSEL (CAROUSEL) FUNKSIYALARI
 // ========================================
