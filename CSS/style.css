@@ -959,6 +959,7 @@ form button:hover {
   color: #b00020;
   font-size: 14px;
 }
+
 /* ===== Sovg'alar bo'limi ===== */
 .gifts {
   width: 100%;
@@ -1006,7 +1007,7 @@ form button:hover {
 }
 
 .gifts__scroller:focus {
-  outline: 2px solid rgba(0,0,0,0.15);
+  outline: 2px solid rgba(34, 34, 34, 0.15);
   outline-offset: 4px;
   border-radius: 10px;
 }
@@ -1014,14 +1015,13 @@ form button:hover {
 /* Kartochka */
 .gift {
   scroll-snap-align: start;
-
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: var(--card-radius);
-  background: #fff;
-
+  background: #ffffff;
   display: grid;
   grid-template-rows: 1fr auto;
   overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 
   /* hover faqat pointer qurilmalarda */
   transition: transform 140ms ease, box-shadow 140ms ease;
@@ -1030,7 +1030,7 @@ form button:hover {
 @media (hover: hover) and (pointer: fine) {
   .gift:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 18px rgba(22, 22, 22, 0.08);
   }
 }
 
@@ -1038,7 +1038,9 @@ form button:hover {
   aspect-ratio: 1 / 1; /* kvadrat */
   display: grid;
   place-items: center;
-  background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01));
+  /* background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01)); */
+  background-color: #fff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
 .gift__img {
