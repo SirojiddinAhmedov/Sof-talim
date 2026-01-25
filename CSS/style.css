@@ -967,7 +967,7 @@ form button:hover {
 
 .gifts__head {
   margin: 0 0 10px;
-  background-color: #38bdf8;
+  background-color: #ffffff;
   padding: 10px;
 }
 
@@ -1073,16 +1073,16 @@ form button:hover {
 
 /* Kattaroq ekranlarda ko'proq ko'rsatamiz:
    notebookda 8ta atrofida */
-/* @media (min-width: 900px) {
+@media (min-width: 900px) {
   .gifts__scroller {
     grid-auto-columns: calc((100% - (var(--gap) * 7)) / 8);
   }
-} */
+}
 
 /* Juda katta desktopda biroz kattaroq ko'rinsin (ixtiyoriy) */
-/* @media (min-width: 1300px) {
+@media (min-width: 1300px) {
   .gifts__scroller {
     --gap: 12px;
   }
   .gifts__title { font-size: 20px; }
-} */
+}
