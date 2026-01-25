@@ -671,20 +671,35 @@ setInterval(load, 30000);
   // Sovg'lar kartochkasi uchun joy
   // ======================================
 
+ 
   const gifts = [
-  { img: "vivo.png",  name: "Telefon",    points: 1000 },
-  { img: "airpod.png", name: "Airpods", points: 120 },
-  { img: "choco.png", name: "Shokolad", points: 450 },
-  { img: "bag.png", name: "Ryukzak", points: 800 },
-  { img: "keyboard.png", name: "Klaviatura", points: 550 },
-  { img: "iphone.png",  name: "Apple",    points: 1000 },
-  { img: "quloqchin.png", name: "Quloqchin", points: 600 },
-  { img: "bank.png", name: "Powerbank", points: 450 },
-  { img: "velosiped.png", name: "Velosiped", points: 800 },
-  { img: "dell.png", name: "Dell Notebook", points: 550 },
-  { img: "sichqon.png", name: "Sichqoncha", points: 300 },
+  { img: "choco.png", name: "Shokolad", points: 400 }, // Kitob, shokolad...
+  { img: "airpod.png", name: "Airpods", points: 1500 }, // Air Pods, barni...
+  { img: "sichqon.png", name: "Sichqoncha", points: 700 }, // Kichik aksessuarlar uchun taxminiy
+  { img: "voucher.png", name: "Chegirma", points: 1600 }, // 50% chegirmali vaucher
+  { img: "quloqchin.png", name: "Quloqchin", points: 1700 }, // Naushnik (16 Sof Pul)
+  { img: "bank.png", name: "Powerbank", points: 900 }, // Naushnik bilan bir xil toifa
+  { img: "velosiped.png", name: "Velosiped", points: 6000 }, // Velosiped
+  { img: "vivo.png", name: "Telefon", points: 8000 }, // Smartfon Vivo Y04
+  { img: "samokat.png", name: "Elektro Samokat", points: 12800 }, // Elektro Samokat
+  { img: "dell.png", name: "Dell Notebook", points: 52000 }, // Noutbuk Dell Inspiron
+  { img: "iphone.png", name: "Apple", points: 57200 }, // Apple iPhone 15
+
+  // Qolgan elementlar (rasmda nomi chiqmaganlari uchun o'rtacha mantiqiy ballar):
+  { img: "keyboard.png", name: "Klaviatura", points: 1000 }, 
+  { img: "book.png", name: "To'plam", points: 1000 },
+  { img: "cap.png", name: "Bosh kiyim", points: 450 },
+  { img: "xo.png", name: "XO o'yini", points: 500 },
+  { img: "bokk1.png", name: "Dunyo Daholari", points: 520 },
+  { img: "kubik.png", name: "Kubik-Rubik", points: 800 },
+  { img: "yandekstan.png", name: "AI suhbatdosh", points: 3000 },
+  { img: "bag.png", name: "Ryukzak", points: 2000 }
+].sort((a, b) => a.points - b.points); // Kichigidan kattasiga tartiblash
+                  
+            
+  
   // xohlagancha qo‘shaverasan
-];
+
 
 const basePath = "images/gifts/"; // hamma rasm shu papkada
 
