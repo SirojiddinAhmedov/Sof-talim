@@ -7,6 +7,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/health", (req, res) => {
+  res.json({ ok: true, message: "Backend ishlayapti ✅" });
+});
+
+
 app.post('/api/lead', async (req, res) => {
     const { name, phone, course } = req.body;
 
@@ -36,3 +41,4 @@ app.post('/api/lead', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server http://localhost:${PORT} portida ishga tushdi`));
+
