@@ -672,18 +672,17 @@ setInterval(load, 30000);
   // ======================================
 
   const gifts = [
-  { img: "../images/airpods.webp",  name: "Telefon",    points: 1000 },
-  { img: "headphones.png", name: "Quloqchin", points: 600 },
-  { img: "powerbank.png", name: "Powerbank", points: 450 },
-  { img: "backpack.png", name: "Ryukzak", points: 800 },
+  { img: "vivo.png",  name: "Telefon",    points: 1000 },
+  { img: "airpod.png", name: "Airpods", points: 120 },
+  { img: "choco.png", name: "Shokolad", points: 450 },
+  { img: "bag.png", name: "Ryukzak", points: 800 },
   { img: "keyboard.png", name: "Klaviatura", points: 550 },
-  { img: "mouse.png", name: "Sichqoncha", points: 300 },
-  { img: "math4.png",  name: "Telefon",    points: 1000 },
-  { img: "headphones.png", name: "Quloqchin", points: 600 },
-  { img: "powerbank.png", name: "Powerbank", points: 450 },
-  { img: "backpack.png", name: "Ryukzak", points: 800 },
-  { img: "keyboard.png", name: "Klaviatura", points: 550 },
-  { img: "mouse.png", name: "Sichqoncha", points: 300 },
+  { img: "iphone.png",  name: "Apple",    points: 1000 },
+  { img: "quloqchin.png", name: "Quloqchin", points: 600 },
+  { img: "bank.png", name: "Powerbank", points: 450 },
+  { img: "velosiped.png", name: "Velosiped", points: 800 },
+  { img: "dell.png", name: "Dell Notebook", points: 550 },
+  { img: "sichqon.png", name: "Sichqoncha", points: 300 },
   // xohlagancha qo‘shaverasan
 ];
 
