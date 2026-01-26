@@ -488,7 +488,7 @@ function setGreen(el, on) {
   if (!el) return;
   // Yashil highlight (CSS qo'shmasdan, JS bilan)
   el.style.background = on ? "#dcfce7" : ""; // light green
-  el.style.borderColor = on ? "#86efac" : "";
+  el.style.borderColor = on ? "#51cf7f" : "";
 }
 
 function clearGreen() {
@@ -613,7 +613,6 @@ async function load() {
     renderList(rows);
     metaEl.textContent = `Yangilangan: ${new Date(json.updatedAt || Date.now()).toLocaleString("uz-UZ")}`;
 
-    // Qidiruv holatini saqlab qolamiz (xohlasangiz reset qilamiz)
     // searchEl.value = "";
     // showSearchResult(null);
 
@@ -697,9 +696,6 @@ setInterval(load, 30000);
 ].sort((a, b) => a.points - b.points); // Kichigidan kattasiga tartiblash
                   
             
-  
-  // xohlagancha qo‘shaverasan
-
 
 const basePath = "images/gifts/"; // hamma rasm shu papkada
 
