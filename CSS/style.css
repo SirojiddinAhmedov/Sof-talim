@@ -211,7 +211,7 @@ form button:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: #fff;
+  background: #faebeb;
   border: none;
   font-size: 32px;
   width: 44px;
@@ -220,18 +220,12 @@ form button:hover {
   cursor: pointer;
   z-index: 10;
 }
-#navbarLead { scroll-margin-top: 90px; } /* navbar balandligiga mos */
+#navbarLead { scroll-margin-top: 90px; } /* navbar balandligiga mos
 
-
+/* 
 .nav-btn.left { left: -10px; }
-.nav-btn.right { right: -10px; }
+.nav-btn.right { right: -10px; } */
 
-/* Responsive */
-@media (max-width: 600px) {
-  .nav-btn {
-    display: none;
-  }
-}
 
 /* ===== PREMIUM COURSE CARD ===== */
 
@@ -316,7 +310,7 @@ form button:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: white;
+  background: rgba(255, 255, 255, 0.901);
   border: none;
   font-size: 30px;
   width: 40px;
@@ -324,15 +318,25 @@ form button:hover {
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-btn.left {
-  left: -10px;
+  left: -5px;
 }
 
 .nav-btn.right {
-  right: -10px;
+  right: -5px;
 }
+
+/* Responsive */
+ @media (max-width: 600px) {
+  .nav-btn {
+    display: none;
+  }
+} 
 
 
 .locations {
