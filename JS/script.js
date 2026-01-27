@@ -715,3 +715,13 @@ container.innerHTML = gifts.map(gift => `
     </div>
   </article>
 `).join("");
+
+// =======================
+//  DARK MODE AND DAY MODE
+// =======================
+
+  const toggle = document.getElementById("themeToggle");
+
+  toggle.addEventListener("click", () => {
+    toggle.classList.toggle("dark");
+  });
