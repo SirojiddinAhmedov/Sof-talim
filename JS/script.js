@@ -626,32 +626,32 @@ async function load() {
 // - ro‘yxat o‘rni o‘zgarmaydi
 // - topilgan o‘quvchi qatori yashil bo‘ladi
 // - Ko‘rsatish bosilganda scroll bo‘ladi va yashil qoladi
-searchEl.addEventListener("input", () => {
-  const q = searchEl.value.trim();
-  const qLower = q.toLowerCase();
+// searchEl.addEventListener("input", () => {
+//   const q = searchEl.value.trim();
+//   const qLower = q.toLowerCase();
 
-  if (!q) {
-    clearGreen();
-    showSearchResult(null);
-    return;
-  }
+//   if (!q) {
+//     clearGreen();
+//     showSearchResult(null);
+//     return;
+//   }
 
-  const found = findBestMatch(qLower);
+//   const found = findBestMatch(qLower);
 
-  clearGreen();
-  if (found) {
-    greenKey = found.key;
-    const el = listEl.querySelector(`[data-key="${CSS.escape(greenKey)}"]`);
-    setGreen(el, true);
-  }
+//   clearGreen();
+//   if (found) {
+//     greenKey = found.key;
+//     const el = listEl.querySelector(`[data-key="${CSS.escape(greenKey)}"]`);
+//     setGreen(el, true);
+//   }
 
-  showSearchResult(found);
-});
+//   showSearchResult(found);
+// });
 
-load();
+// load();
 
-// xohlasangiz avtomatik yangilanish:
-setInterval(load, 30000);
+// // xohlasangiz avtomatik yangilanish:
+// setInterval(load, 30000);
 
  (function () {
     const scroller = document.querySelector(".gifts__scroller");
@@ -719,8 +719,8 @@ container.innerHTML = gifts.map(gift => `
 //  DARK MODE AND DAY MODE
 // =======================
 
-  const toggle = document.getElementById("themeToggle");
+  // const toggle = document.getElementById("themeToggle");
 
-  toggle.addEventListener("click", () => {
-    toggle.classList.toggle("dark");
-  });
+  // toggle.addEventListener("click", () => {
+  //   toggle.classList.toggle("dark");
+  // });
