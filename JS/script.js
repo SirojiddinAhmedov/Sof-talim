@@ -669,7 +669,6 @@ setInterval(load, 30000);
   // ====================================
   // Sovg'lar kartochkasi uchun joy
   // ======================================
-
  
   const gifts = [
   { img: "choco.jpg", name: "Shokolad", points: 400 }, // Kitob, shokolad...
