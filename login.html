@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    body{font-family:system-ui,Arial;display:grid;place-items:center;min-height:100vh;background:#0b1220;color:#e8eefc}
+    .card{width:min(420px,92vw);background:#121b2f;border:1px solid #243255;border-radius:16px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    h1{margin:0 0 12px;font-size:20px}
+    label{display:block;margin:10px 0 6px;color:#b8c6ef;font-size:13px}
+    input{width:90%;padding:12px 12px;border-radius:12px;border:1px solid #2a3a63;background:#0d1528;color:#e8eefc;outline:none}
+    button{width:90%;margin-top:14px;padding:12px;border:0;border-radius:12px;background:#4f7cff;color:white;font-weight:600;cursor:pointer}
+    button:disabled{opacity:.6;cursor:not-allowed}
+    .msg{margin-top:12px;font-size:13px;color:#ffb3b3;min-height:18px}
+    .hint{margin-top:10px;font-size:12px;color:#9fb1e6;opacity:.9}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Ichki tizimga kirish</h1>
+
+    <label for="username">Login</label>
+    <input id="username" autocomplete="username" />
+
+    <label for="password">Parol</label>
+    <input id="password" type="password" autocomplete="current-password" />
+
+    <button id="btn">Kirish</button>
+    <div class="msg" id="msg"></div>
+
+    <div class="hint">Eslatma: Bu sahifani internetga ochiq qo‘ymang. HTTPS va kuchli parol ishlating.</div>
+  </div>
+
+<script>
+const btn = document.getElementById('btn');
+const msg = document.getElementById('msg');
+
+btn.onclick = async () => {
+  msg.textContent = '';
+  btn.disabled = true;
+
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+
+  try {
+    const res = await fetch('http://localhost:3000/api/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data?.error || 'Login xato');
+
+    // tokenni saqlab qo'yamiz
+    localStorage.setItem('auth_token', data.token);
+
+    // admin sahifaga o'tamiz
+    window.location.href = './admin.html';
+  } catch (e) {
+    msg.textContent = e.message;
+  } finally {
+    btn.disabled = false;
+  }
+};
+</script>
+</body>
+</html>
