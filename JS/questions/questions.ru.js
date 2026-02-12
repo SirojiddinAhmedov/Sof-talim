@@ -1,127 +1,101 @@
 // JS/questions/questions.ru.js
 export const QUESTIONS_RU = [
 
-  // A1–A2 (Boshlang'ich)
+  // --- A1 (Boshlang'ich: Salomlashish, asosiy fe'llar) ---
 
   {
-    q: "To'g'ri variantni tanlang: Я ___ студент.",
-    options: ["есть", "—", "быть", "будш"],
-    answer: 1 // Rus tilida hozirgi zamonda "man" (to be) fe'li o'rniga tire qo'yiladi
-  },
-  {
-    q: "“Mening ismim...” iborasi qaysi javobda to'g'ri ko'rsatilgan?",
-    options: ["Я имя", "Меня зовут", "Меня имя", "Я зову"],
-    answer: 1
-  },
-  {
-    q: "«Uy» so'zining to'g'ri tarjimasini tanlang:",
-    options: ["школа", "дом", "магазин", "улица"],
-    answer: 1
-  },
-  {
-    q: "To'g'ri shaklni tanlang: Он ___ в школе.",
-    options: ["учится", "учусь", "учишься", "учатся"],
+    q: "«Men talabaman» gapining to'g'ri tarjimasini ko'rsating:",
+    options: ["Я студент", "Я есть студент", "Я быть студент", "Меня студент"],
     answer: 0
   },
   {
-    q: "«Ishlar qalay?» deb qanday to'g'ri so'raladi?",
-    options: ["Что дело?", "Как дела?", "Как ты дела?", "Что ты?"],
+    q: "Tegishli olmoshni tanlang: Где ___ книга?",
+    options: ["мой", "моя", "моё", "мои"],
     answer: 1
   },
   {
-    q: "To'g'ri so'zni tanlang: Я ___ чай.",
-    options: ["пью", "пить", "пьёт", "пей"],
-    answer: 0
-  },
-  {
-    q: "To'g'ri variantni tanlang: Мы ___ в парк.",
-    options: ["иду", "идёт", "идём", "идут"],
+    q: "Hozirgi zamon fe'l shaklini tanlang: Она хорошо ___ по-русски.",
+    options: ["говорят", "говоришь", "говорит", "говорю"],
     answer: 2
   },
-
-  // B1 (O'rta)
-
   {
-    q: "O'tgan zamon shaklini tanlang: Я ___ книгу.",
-    options: ["читаю", "читал", "читаюся", "читает"],
+    q: "Sonning to'g'ri shaklini toping: У меня есть две ___.",
+    options: ["сестра", "сестры", "сестер", "сестрами"],
     answer: 1
-  },
-  {
-    q: "«Быстро» (tez) so'zining sinonimini toping:",
-    options: ["медленно", "скорее", "быстро", "скоро"], 
-    answer: 3 // "skoro" bu yerda yaqin orada yoki tezda ma'nosida
-  },
-  {
-    q: "To'g'ri variantni tanlang: Она ___ домой поздно.",
-    options: ["пришёл", "пришла", "приходил", "приходит"],
-    answer: 1
-  },
-  {
-    q: "To'g'ri gapni aniqlang:",
-    options: [
-      "Мне нравится читать книги.",
-      "Я нравится читать книги.",
-      "Мне нравиться книги.",
-      "Я нравится книги."
-    ],
-    answer: 0
-  },
-  {
-    q: "«Высокий» (baland) so'ziga antonim (teskari ma'no) tanlang:",
-    options: ["низкий", "большой", "широкий", "длинный"],
-    answer: 0
-  },
-  {
-    q: "Kelasi zamon shaklini tanlang: Завтра я ___ работать.",
-    options: ["буду", "есть", "был", "будет"],
-    answer: 0
-  },
-  {
-    q: "To'g'ri kelishikni (падеж) tanlang: Я думаю о ___ (друг).",
-    options: ["друг", "друга", "друге", "другом"],
-    answer: 2 // Predlojniy padej: o kom? - o druge
   },
 
-  // B2 (Yuqori)
+  // --- A2 (Kundalik hayot, o'tgan zamon, yo'nalishlar) ---
 
   {
-    q: "«Впечатляющий» (hayratlanarli) so'zining sinonimini toping:",
-    options: ["скучный", "удивительный", "простой", "тихий"],
+    q: "O'tgan zamon fe'lini tanlang: Вчера мы ___ в кино.",
+    options: ["идем", "ходили", "пойти", "ходим"],
     answer: 1
   },
   {
-    q: "To'g'ri variantni tanlang: Несмотря на дождь, мы ___ гулять.",
-    options: ["пошли", "идём", "ходим", "шли"],
-    answer: 0
-  },
-  {
-    q: "Grammatik jihatdan to'g'ri gapni tanlang:",
-    options: [
-      "Если бы я знал, я бы помог.",
-      "Если я бы знал, я помог.",
-      "Если бы я знал, я помог.",
-      "Если я знал, я бы помог."
-    ],
-    answer: 0
-  },
-  {
-    q: "«Очень устал» (juda charchadim) iborasini sinonim bilan almashtiring:",
-    options: [
-      "немного устал",
-      "без сил",
-      "отдохнувший",
-      "весёлый"
-    ],
-    answer: 1
-  },
-  {
-    q: "To'g'ri bog'lovchini tanlang: Он говорил так, ___ все поняли.",
-    options: ["что", "чтобы", "потому что", "если"],
-    answer: 1
-  },
-  {
-    q: "Frazani mantiqan yakunlang: Опыт важнее, чем…",
-    options: ["деньги", "учиться", "учёба", "учился"],
+    q: "Qaysi so'z 'shahar' (город) so'ziga antonim?",
+    options: ["Улица", "Страна", "Деревня", "Площадь"],
     answer: 2
+  },
+  {
+    q: "Jumlani to'ldiring: Я хочу ___ сок.",
+    options: ["пить", "пью", "пила", "выпил"],
+    answer: 0
+  },
+  {
+    q: "To'g'ri predlogni tanlang: Мой брат работает ___ заводе.",
+    options: ["в", "на", "около", "под"],
+    answer: 1
+  },
+
+  // --- B1 (O'rta daraja: Kelishiklar, kelasi zamon) ---
+
+  {
+    q: "Tushum kelishigini (Винительный падеж) tanlang: Я вижу синюю ___.",
+    options: ["машина", "машину", "машине", "машиной"],
+    answer: 1
+  },
+  {
+    q: "Tegishli sifat shaklini tanlang: Это был самый ___ день в моей жизни.",
+    options: ["хорошо", "лучший", "лучше", "хороший"],
+    answer: 1
+  },
+  {
+    q: "Fe'lning tugallangan turini toping: Завтра я обязательно ___ эту работу.",
+    options: ["делаю", "сделаю", "буду делать", "сделал"],
+    answer: 1
+  },
+  {
+    q: "«Uchrashmoq» fe'lining to'g'ri boshqaruvini toping: Мы встретились с ___.",
+    options: ["другом", "друга", "другу", "друге"],
+    answer: 0
+  },
+
+  // --- B2 (Yuqori daraja: Murakkab sintaksis, frazeologiya) ---
+
+  {
+    q: "Gapni mantiqan to'ldiring: Мы не пошли гулять, ___ начался сильный дождь.",
+    options: ["несмотря на", "так как", "хотя", "вследствие"],
+    answer: 1
+  },
+  {
+    q: "Qaysi gap grammatik jihatdan to'g'ri?",
+    options: [
+      "Прочитав книгу, мне стало грустно.",
+      "Прочитав книгу, я узнал много нового.",
+      "Прочитанная книга, я пошел спать.",
+      "Я прочитал книга вчера."
+    ],
+    answer: 1
+  },
+  {
+    q: "«Бить баклуши» iborasining ma'nosini toping:",
+    options: ["Много работать", "Сильно ударить", "Бездельничать", "Громко шуметь"],
+    answer: 2
+  },
+  {
+    q: "To'g'ri bog'lovchini tanlang: Он попросил, ___ я пришел пораньше.",
+    options: ["что", "чтобы", "зачем", "будто"],
+    answer: 1
   }
+
 ];
