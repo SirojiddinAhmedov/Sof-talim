@@ -1,12 +1,13 @@
 import { QUESTIONS_EN } from "./questions/questions.en.js";
 import { QUESTIONS_RU } from "./questions/questions.ru.js";
 import { QUESTIONS_AR } from "./questions/questions.ar.js";
-// agar bo'lsa
+import { QUESTIONS_MATH } from "./questions/questions.math.js"; // ✅ qo‘shildi
 
 const BANK = {
   en: { name: "English Test", questions: QUESTIONS_EN },
   ru: { name: "Русский тест", questions: QUESTIONS_RU },
-  ar: { name: "اختبار العربية", questions: QUESTIONS_AR }
+  ar: { name: "اختبار العربية", questions: QUESTIONS_AR },
+  math: { name: "Math Test", questions: QUESTIONS_MATH } // ✅ qo‘shildi
 };
 
 const params = new URLSearchParams(location.search);
@@ -54,14 +55,16 @@ function render() {
   });
 
   barEl.style.width = (index / questions.length) * 100 + "%";
-
-  // Next tugma matni oxirida "Finish" bo'lsin
   nextBtn.textContent = (index === questions.length - 1) ? "Finish" : "Next";
 }
 
 nextBtn.onclick = () => {
   if (selected === null) {
-    alert(lang === "ru" ? "Выберите вариант!" : "Choose an answer!");
+    const msg =
+      lang === "ru" ? "Выберите вариант!" :
+      lang === "ar" ? "اختر إجابة!" :
+      "Choose an answer!";
+    alert(msg);
     return;
   }
 
@@ -76,14 +79,15 @@ function finish() {
   cardEl.classList.add("hidden");
   barEl.style.width = "100%";
 
-  // Demo level (xohlasangiz keyin aniqroq qilamiz)
   const pct = score / questions.length;
+
+  // Default (EN)
   let level =
     pct < 0.4 ? "Beginner" :
     pct < 0.7 ? "Elementary" :
     "Intermediate";
 
-  // Ruscha label
+  // RU label
   if (lang === "ru") {
     level =
       pct < 0.4 ? "Начальный" :
@@ -91,11 +95,42 @@ function finish() {
       "Средний";
   }
 
+  // AR label (ixtiyoriy, oddiy)
+  if (lang === "ar") {
+    level =
+      pct < 0.4 ? "مبتدئ" :
+      pct < 0.7 ? "متوسط" :
+      "جيد";
+  }
+
+  // MATH label (UZ) — xohlasangiz o‘zgartirasiz
+  if (lang === "math") {
+    level =
+      pct < 0.4 ? "Boshlang‘ich" :
+      pct < 0.7 ? "O‘rta" :
+      "Yaxshi";
+  }
+
+  const title =
+    lang === "ru" ? "Результат" :
+    lang === "ar" ? "النتيجة" :
+    "Result";
+
+  const levelLabel =
+    lang === "ru" ? "Уровень" :
+    lang === "ar" ? "المستوى" :
+    "Level";
+
+  const restartText =
+    lang === "ru" ? "Пройти снова" :
+    lang === "ar" ? "إعادة" :
+    "Restart";
+
   resultEl.innerHTML = `
-    <h2>${lang === "ru" ? "Результат" : "Result"}</h2>
+    <h2>${title}</h2>
     <h3>${score} / ${questions.length}</h3>
-    <p>${lang === "ru" ? "Уровень" : "Level"}: <b>${level}</b></p>
-    <button class="restart" onclick="location.reload()">${lang === "ru" ? "Пройти снова" : "Restart"}</button>
+    <p>${levelLabel}: <b>${level}</b></p>
+    <button class="restart" onclick="location.reload()">${restartText}</button>
   `;
 
   resultEl.classList.remove("hidden");
