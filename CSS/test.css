@@ -126,3 +126,18 @@ h2{
 .hidden{
   display:none;
 }
+
+.restart {
+    background-color: #0a8f3c;
+    color: #fff8f8 !important;
+    text-decoration: none !important;
+    padding: 12px 25px;
+    border-radius: 40px;
+    font-weight: 800;
+    font-size: 15px;
+    width: fit-content;
+    cursor: pointer;
+    border: none;
+    display: block;    /* Blok ko'rinishida */
+    margin: 20px auto; /* 20px tepadagi masofa, auto esa markazga olish uchun */
+}
