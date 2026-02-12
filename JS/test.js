@@ -1,156 +1,102 @@
-const questions = [
-    {
-    q: "Look at the picture. What is happening?",
-    img: "img/bus.jpg",
-    options: [
-      "He is missing the bus.",
-      "He is cooking.",
-      "He is sleeping.",
-      "He is swimming."
-    ],
-    answer: 0
-  },
+import { QUESTIONS_EN } from "./questions/questions.en.js";
+import { QUESTIONS_RU } from "./questions/questions.ru.js";
+import { QUESTIONS_AR } from "./questions/questions.ar.js";
+// agar bo'lsa
 
-  {
-    q: "You’re in a cafe. Choose the most polite sentence:",
-    options: [
-      "Give me water.",
-      "Water!",
-      "Could I have some water, please?",
-      "You must bring water."
-    ],
-    answer: 2
-  },
-  {
-    q: "Which word is closest to “brilliant”?",
-    options: ["Smart", "Heavy", "Slow", "Empty"],
-    answer: 0
-  },
-  {
-    q: "Your friend texts: “I passed the exam 😭”. What does it mean?",
-    options: [
-      "He is angry",
-      "He is happy",
-      "He is sick",
-      "He failed"
-    ],
-    answer: 1
-  },
-  {
-    q: "If I ____ more time, I would travel.",
-    options: ["have", "had", "will have", "having"],
-    answer: 1
-  },
-  {
-    q: "Someone drops a glass. What do you say?",
-    options: [
-      "Are you okay?",
-      "Congratulations",
-      "Sleep now",
-      "Winner"
-    ],
-    answer: 0
-  }
-];
+const BANK = {
+  en: { name: "English Test", questions: QUESTIONS_EN },
+  ru: { name: "Русский тест", questions: QUESTIONS_RU },
+  ar: { name: "اختبار العربية", questions: QUESTIONS_AR }
+};
+
+const params = new URLSearchParams(location.search);
+const lang = (params.get("lang") || "en").toLowerCase();
+
+const pack = BANK[lang] || BANK.en;
+const questions = pack.questions;
+
+const titleEl = document.getElementById("title");
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("nextBtn");
+const counterEl = document.getElementById("counter");
+const barEl = document.getElementById("bar");
+const resultEl = document.getElementById("result");
+const cardEl = document.querySelector(".card");
+
+titleEl.textContent = pack.name;
 
 let index = 0;
 let score = 0;
 let selected = null;
 
-const questionEl = document.getElementById("question");
-const answersEl = document.getElementById("answers");
-const nextBtn = document.getElementById("nextBtn");
-const counter = document.getElementById("counter");
-const bar = document.getElementById("bar");
-const result = document.getElementById("result");
-const quiz = document.getElementById("quiz");
+render();
 
-load();
-
-function load() {
-
-const questionEl = document.getElementById("question");
-const answersEl = document.getElementById("answers");
-const media = document.getElementById("media");
-
-
+function render() {
   selected = null;
 
   const q = questions[index];
-
-  counter.innerText = `Question ${index + 1} / ${questions.length}`;
-
-  questionEl.innerText = q.q;
-
-  // Image logic
-if (q.img) {
-  media.src = q.img;
-  media.style.display = "block";
-} else {
-  media.style.display = "none";
-}
-
+  counterEl.textContent = `Question ${index + 1} / ${questions.length}`;
+  questionEl.textContent = q.q;
 
   answersEl.innerHTML = "";
-
   q.options.forEach((opt, i) => {
     const btn = document.createElement("button");
-    btn.innerText = opt;
+    btn.textContent = opt;
 
     btn.onclick = () => {
       selected = i;
-
-      document
-        .querySelectorAll("#answers button")
-        .forEach(b => b.style.background = "#1e293b");
-
-      btn.style.background = "#22c55e";
+      document.querySelectorAll(".answers button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
     };
 
     answersEl.appendChild(btn);
   });
 
-  bar.style.width =
-    ((index + 1) / questions.length) * 100 + "%";
+  barEl.style.width = (index / questions.length) * 100 + "%";
+
+  // Next tugma matni oxirida "Finish" bo'lsin
+  nextBtn.textContent = (index === questions.length - 1) ? "Finish" : "Next";
 }
 
 nextBtn.onclick = () => {
-
   if (selected === null) {
-    alert("Choose an answer!");
+    alert(lang === "ru" ? "Выберите вариант!" : "Choose an answer!");
     return;
   }
 
-  if (selected === questions[index].answer) {
-    score++;
-  }
+  if (selected === questions[index].answer) score++;
 
   index++;
-
-  if (index < questions.length) {
-    load();
-  } else {
-    finish();
-  }
+  if (index < questions.length) render();
+  else finish();
 };
 
 function finish() {
+  cardEl.classList.add("hidden");
+  barEl.style.width = "100%";
 
-  quiz.classList.add("hidden");
+  // Demo level (xohlasangiz keyin aniqroq qilamiz)
+  const pct = score / questions.length;
+  let level =
+    pct < 0.4 ? "Beginner" :
+    pct < 0.7 ? "Elementary" :
+    "Intermediate";
 
-  let level = "";
+  // Ruscha label
+  if (lang === "ru") {
+    level =
+      pct < 0.4 ? "Начальный" :
+      pct < 0.7 ? "Базовый" :
+      "Средний";
+  }
 
-  if (score <= 1) level = "Beginner (A1)";
-  else if (score <= 3) level = "Elementary (A2)";
-  else if (score <= 4) level = "Intermediate (B1)";
-  else level = "Advanced (B2)";
-
-  result.innerHTML = `
-    <h2>Your Result</h2>
-    <p>Score: ${score} / ${questions.length}</p>
-    <h3>Level: ${level}</h3>
-    <p>📚 We recommend joining our course!</p>
+  resultEl.innerHTML = `
+    <h2>${lang === "ru" ? "Результат" : "Result"}</h2>
+    <h3>${score} / ${questions.length}</h3>
+    <p>${lang === "ru" ? "Уровень" : "Level"}: <b>${level}</b></p>
+    <button class="restart" onclick="location.reload()">${lang === "ru" ? "Пройти снова" : "Restart"}</button>
   `;
 
-  result.classList.remove("hidden");
+  resultEl.classList.remove("hidden");
 }
