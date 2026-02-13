@@ -1,143 +1,219 @@
-*{
-  box-sizing: border-box;
-  margin:0;
-  padding:0;
-  font-family: system-ui, sans-serif;
+/* Umumiy sozlamalar */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-body{
-  height:100vh;
-  background: linear-gradient(180deg,#0a8f3c,#055a26);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:white;
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a8f3c, #055a26);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Mobil ekranlarda chetidan joy qolishi uchun */
+    color: white;
 }
 
-/* App */
-.app{
-  width:100%;
-  max-width:420px;
-  height:100vh;
-  padding:0px;
-  display:flex;
-  flex-direction:column;
+/* Konteyner - barcha qurilmalar uchun moslashuvchan */
+.app {
+    width: 100%;
+    max-width: 600px; /* Planshetlar uchun kengroq qildik */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* Progress */
-.progress{
-  width:100%;
-  height:6px;
-  background: rgba(255,255,255,.2);
-  border-radius:10px;
-  overflow:hidden;
-  margin-bottom:20px;
+/* Progress Bar */
+.top {
+    width: 100%;
 }
 
-#bar{
-  height:100%;
-  width:0%;
-  background:white;
-  transition:.3s;
+#counter {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+    text-align: right;
 }
 
-/* Card */
-.card{
-  flex:1;
-  background: rgba(0, 0, 0, 0.183);
-  border-radius:20px;
-  padding:10px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  backdrop-filter: blur(8px);
+.progress {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.counter{
-  font-size:14px;
-  opacity:.8;
+#bar {
+    height: 100%;
+    width: 0%;
+    background: #4ade80; /* Och yashil chiroyli rang */
+    transition: width 0.4s ease-out;
 }
 
-/* Question */
-h2{
-  font-size:22px;
-  line-height:1.4;
-  margin:20px 0;
+/* Card qismi */
+.card {
+    display: flex;
+    flex-direction: column;
 }
 
-/* Answers */
-.answers{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+#title {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    margin-bottom: 10px;
 }
 
-.answers button{
-  padding:14px;
-  border:none;
-  border-radius:14px;
-  background: rgba(255,255,255,.15);
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-  transition:.2s;
+#question {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 25px;
 }
 
-.answers button:hover{
-  background: rgba(255,255,255,.3);
+/* Javoblar tugmalari */
+.answers {
+    display: grid;
+    grid-template-columns: 1fr; /* Default bir ustunli */
+    gap: 12px;
 }
 
-.answers button.active{
-  background: #22c55e;
-  color:black;
-  font-weight:700;
+.answers button {
+    padding: 16px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-/* Next */
-#nextBtn{
-  margin-top:20px;
-  padding:14px;
-  border:none;
-  border-radius:16px;
-  background:white;
-  color:#055a26;
-  font-size:17px;
-  font-weight:700;
-  cursor:pointer;
+.answers button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
 }
 
-#nextBtn:hover{
-  opacity:.9;
+.answers button.active {
+    background: white;
+    color: #055a26;
+    font-weight: 700;
+    border-color: white;
 }
 
-/* Result */
-.result{
-  flex:1;
-  background: rgba(0,0,0,.5);
-  border-radius:20px;
-  padding:30px;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:15px;
+/* Next tugmasi */
+#nextBtn {
+    margin-top: 30px;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #055a26;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
 }
 
-.hidden{
-  display:none;
+#nextBtn:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
 }
 
+#nextBtn:active {
+    transform: translateY(0);
+}
+
+/* Natija qismi */
+.result {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Restart tugmasi - natija oynasida chiqadi */
 .restart {
-    background-color: #0a8f3c;
-    color: #fff8f8 !important;
+    background-color: #4ade80; /* Jonliroq yashil */
+    color: #11571f !important;
     text-decoration: none !important;
-    padding: 12px 25px;
-    border-radius: 40px;
-    font-weight: 800;
-    font-size: 15px;
+    padding: 14px 30px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
     width: fit-content;
     cursor: pointer;
     border: none;
-    display: block;    /* Blok ko'rinishida */
-    margin: 20px auto; /* 20px tepadagi masofa, auto esa markazga olish uchun */
+    display: block;
+    margin: 25px auto 0 auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+}
+
+.restart:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+.restart:active {
+    transform: scale(0.98);
+}
+
+/* Natija oynasi ichidagi matnlar uchun qo'shimcha stil */
+.result h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.result p {
+    font-size: 18px;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* RESPONSIVE (Moslashuvchanlik) */
+
+/* Planshetlar uchun (600px dan kattaroq) */
+@media (min-width: 600px) {
+    .app {
+        padding: 40px;
+    }
+    
+    #question {
+        font-size: 28px;
+    }
+
+    /* Agar javoblar qisqa bo'lsa, 2 ustunli qilish mumkin */
+    /* .answers { grid-template-columns: 1fr 1fr; } */
+}
+
+/* Kichik mobil telefonlar uchun */
+@media (max-width: 400px) {
+    .app {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    #question {
+        font-size: 20px;
+    }
+
+    .answers button {
+        padding: 12px 15px;
+        font-size: 15px;
+    }
 }
