@@ -1296,3 +1296,52 @@ form button:hover {
             padding: 20px;
         }
     }
+
+/* ===================================== */
+ /* YOU TUBE VIDEO SSECTIOPN */
+/* =================================== */
+/* Tashqi blok - hamma narsani markazga yig'ish uchun */
+.video-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    min-height: 50vh; /* Ekran balandligiga qarab o'zgartirishingiz mumkin */
+}
+
+/* Video konteyneri */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* Desktopda videoning maksimal kengligi */
+    padding-bottom: 56.25%; /* 16:9 nisbat */
+    height: 0;
+    
+    /* Dizayn elementlari */
+    border-radius: 20px; /* Chetlarini yumaloq qilish */
+    overflow: hidden;    /* Video burchaklari chiqib ketmasligi uchun */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Mayin soya */
+    background-color: #000;
+}
+
+/* Iframe sozlamalari */
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Mobil qurilmalar uchun moslashuv */
+@media (max-width: 768px) {
+    .video-wrapper {
+        padding: 10px;
+    }
+    
+    .video-container {
+        border-radius: 12px; /* Mobilda kichikroq radius */
+    }
+}
